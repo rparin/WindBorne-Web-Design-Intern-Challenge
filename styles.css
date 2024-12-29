@@ -81,6 +81,14 @@ legend {
   width: 136px;
 }
 
+#ValueError {
+  color: red;
+  font-weight: bold;
+  font-size: x-small;
+  padding-top: 0.5rem;
+  display: none;
+}
+
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
   /* Styles for small devices */
@@ -143,6 +151,7 @@ legend {
   --min: #095470;
   --mid: #1d9b51;
   --max: #ffab00;
+  --number: 53;
 
   width: var(--w);
   aspect-ratio: 1/1;
@@ -197,6 +206,7 @@ legend {
 }
 
 .gauge-min {
+  --number: 42;
   position: absolute;
   font-weight: bold;
   bottom: 50px;
@@ -206,6 +216,7 @@ legend {
 }
 
 .gauge-max {
+  --number: 65;
   position: absolute;
   font-weight: bold;
   bottom: 50px;

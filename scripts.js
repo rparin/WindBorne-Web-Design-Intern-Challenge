@@ -17,21 +17,44 @@ function valuesEventListener() {
       const gauge = document.querySelector(".gauge");
       const gaugeMin = document.querySelector(".gauge-min");
       const gaugeMax = document.querySelector(".gauge-max");
+      const size =
+        document.querySelector('input[name="marker-Size"]:checked').value ===
+        "large"
+          ? "medium"
+          : "small";
       if (event.target.type === "number" && gauge && gaugeMin && gaugeMax) {
-        const abrNum = abbreviateNumber(event.target.value);
-        switch (event.target.name) {
-          case "minValue":
-            gaugeMin.style.fontSize = getFontSize(event.target.value);
-            gaugeMin.textContent = abrNum;
-            break;
-          case "maxValue":
-            gaugeMax.style.fontSize = getFontSize(event.target.value);
-            gaugeMax.textContent = abrNum;
-            break;
-          default:
-            //curValue
-            gauge.textContent = abrNum;
-            break;
+        //Show Error Message if invalid value
+        if (isValidValue(event.target.value)) {
+          const abrNum = abbreviateNumber(event.target.value);
+          switch (event.target.name) {
+            case "minValue":
+              if (isValidMinValue(event.target.value)) {
+                gaugeMin.style.setProperty("--number", event.target.value);
+                gaugeMin.style.fontSize = getFontSize(event.target.value, size);
+                gaugeMin.textContent = abrNum;
+              } else {
+                event.target.value = "";
+              }
+              break;
+            case "maxValue":
+              if (isValidMaxValue(event.target.value)) {
+                gaugeMax.style.setProperty("--number", event.target.value);
+                gaugeMax.style.fontSize = getFontSize(event.target.value, size);
+                gaugeMax.textContent = abrNum;
+              } else {
+                event.target.value = "";
+              }
+              break;
+            default:
+              //curValue
+              if (isValidCurValue(event.target.value)) {
+                gauge.style.setProperty("--number", event.target.value);
+                gauge.textContent = abrNum;
+              } else {
+                event.target.value = "";
+              }
+              break;
+          }
         }
       }
     });
@@ -85,6 +108,12 @@ function sizesEventListener() {
         gaugeMin &&
         gaugeMax
       ) {
+        const minValue = Number(
+          getComputedStyle(gaugeMin).getPropertyValue("--number")
+        );
+        const maxValue = Number(
+          getComputedStyle(gaugeMax).getPropertyValue("--number")
+        );
         switch (event.target.value) {
           case "large":
             container.style.height = "170px";
@@ -101,8 +130,8 @@ function sizesEventListener() {
             gaugeMax.style.bottom = "50px";
             gaugeMin.style.right = "82px";
             gaugeMax.style.right = "35px";
-            gaugeMin.style.fontSize = getFontSize(gaugeMin.textContent);
-            gaugeMax.style.fontSize = getFontSize(gaugeMax.textContent);
+            gaugeMin.style.fontSize = getFontSize(minValue);
+            gaugeMax.style.fontSize = getFontSize(maxValue);
             break;
           default:
             //small
@@ -116,8 +145,8 @@ function sizesEventListener() {
             gauge.style.setProperty("--b", "9px");
             gauge.style.setProperty("--w", "80px");
             gauge.style.fontSize = "2rem";
-            gaugeMin.style.fontSize = getFontSize(gaugeMin.textContent);
-            gaugeMax.style.fontSize = getFontSize(gaugeMax.textContent);
+            gaugeMin.style.fontSize = getFontSize(minValue, "small");
+            gaugeMax.style.fontSize = getFontSize(maxValue, "small");
             gaugeMin.style.bottom = "58px";
             gaugeMax.style.right = "34px";
             gaugeMax.style.bottom = "58px";
@@ -130,18 +159,14 @@ function sizesEventListener() {
 }
 
 // HELPER FUNCTIONS
-function getFontSize(num) {
-  if (
-    num >= 1000 ||
-    num.includes("K") ||
-    num.includes("M") ||
-    num.includes("B") ||
-    num.includes("T")
-  ) {
-    return "smallest";
+function getFontSize(num, def = "medium") {
+  if (num >= 10000) {
+    return "x-small";
   }
-  if (num >= 100) return "smaller";
-  return "medium";
+  if (num >= 1000) return "smaller";
+  if (num >= 0) return def;
+  if (num <= -10000) return "x-small";
+  if (num <= -1000) return "smaller";
 }
 
 function abbreviateNumber(num) {
@@ -161,4 +186,69 @@ function abbreviateNumber(num) {
   }
 
   return num;
+}
+
+function isValidValue(num) {
+  if (isNaN(num)) return false;
+  if (num === "") return false;
+  return true;
+}
+
+//check that minValue < maxValue
+function isValidMinValue(num) {
+  const gaugeMax = document.querySelector(".gauge-max");
+  const valueError = document.querySelector("#ValueError");
+  if (
+    Number(num) >=
+    Number(getComputedStyle(gaugeMax).getPropertyValue("--number"))
+  ) {
+    valueError.textContent =
+      "Invalid Min Value, value must be less than Max Value";
+    valueError.style.display = "block";
+    return false;
+  }
+  valueError.textContent = "";
+  valueError.style.display = "none";
+  return true;
+}
+
+//check that maxValue < minValue
+function isValidMaxValue(num) {
+  const gaugeMin = document.querySelector(".gauge-min");
+  const valueError = document.querySelector("#ValueError");
+  if (
+    Number(num) <=
+    Number(getComputedStyle(gaugeMin).getPropertyValue("--number"))
+  ) {
+    valueError.textContent =
+      "Invalid Max Value, value must be greater than Min Value";
+    valueError.style.display = "block";
+    return false;
+  }
+  valueError.textContent = "";
+  valueError.style.display = "none";
+  return true;
+}
+
+//Check that CurValue is between minValue and maxValue
+function isValidCurValue(num) {
+  const gaugeMin = document.querySelector(".gauge-min");
+  const gaugeMax = document.querySelector(".gauge-max");
+  const valueError = document.querySelector("#ValueError");
+  const minValue = Number(
+    getComputedStyle(gaugeMin).getPropertyValue("--number")
+  );
+  const maxValue = Number(
+    getComputedStyle(gaugeMax).getPropertyValue("--number")
+  );
+
+  if (Number(num) >= minValue && Number(num) <= maxValue) {
+    valueError.textContent = "";
+    valueError.style.display = "none";
+    return true;
+  }
+  valueError.textContent =
+    "Invalid Cur Value, value must be between minValue and maxValue";
+  valueError.style.display = "block";
+  return false;
 }
