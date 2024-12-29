@@ -5,9 +5,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Function to set up event listeners
 function setupEventListeners() {
+  valuesEventListener();
   colorsEventListener();
   sizesEventListener();
-  valuesEventListener();
 }
 
 function valuesEventListener() {
@@ -18,16 +18,19 @@ function valuesEventListener() {
       const gaugeMin = document.querySelector(".gauge-min");
       const gaugeMax = document.querySelector(".gauge-max");
       if (event.target.type === "number" && gauge && gaugeMin && gaugeMax) {
+        const abrNum = abbreviateNumber(event.target.value);
         switch (event.target.name) {
           case "minValue":
-            gaugeMin.textContent = event.target.value;
+            gaugeMin.style.fontSize = getFontSize(event.target.value);
+            gaugeMin.textContent = abrNum;
             break;
           case "maxValue":
-            gaugeMax.textContent = event.target.value;
+            gaugeMax.style.fontSize = getFontSize(event.target.value);
+            gaugeMax.textContent = abrNum;
             break;
           default:
             //curValue
-            gauge.textContent = event.target.value;
+            gauge.textContent = abrNum;
             break;
         }
       }
@@ -98,8 +101,8 @@ function sizesEventListener() {
             gaugeMax.style.bottom = "50px";
             gaugeMin.style.right = "82px";
             gaugeMax.style.right = "35px";
-            gaugeMin.style.fontSize = "larger";
-            gaugeMax.style.fontSize = "larger";
+            gaugeMin.style.fontSize = getFontSize(gaugeMin.textContent);
+            gaugeMax.style.fontSize = getFontSize(gaugeMax.textContent);
             break;
           default:
             //small
@@ -113,15 +116,49 @@ function sizesEventListener() {
             gauge.style.setProperty("--b", "9px");
             gauge.style.setProperty("--w", "80px");
             gauge.style.fontSize = "2rem";
-            gaugeMin.style.fontSize = "medium";
-            gaugeMax.style.fontSize = "medium";
+            gaugeMin.style.fontSize = getFontSize(gaugeMin.textContent);
+            gaugeMax.style.fontSize = getFontSize(gaugeMax.textContent);
             gaugeMin.style.bottom = "58px";
-            gaugeMin.style.right = "67px";
+            gaugeMax.style.right = "34px";
             gaugeMax.style.bottom = "58px";
-            gaugeMax.style.right = "33px";
+            gaugeMin.style.right = "62px";
             break;
         }
       }
     });
   }
+}
+
+// HELPER FUNCTIONS
+function getFontSize(num) {
+  if (
+    num >= 1000 ||
+    num.includes("K") ||
+    num.includes("M") ||
+    num.includes("B") ||
+    num.includes("T")
+  ) {
+    return "smallest";
+  }
+  if (num >= 100) return "smaller";
+  return "medium";
+}
+
+function abbreviateNumber(num) {
+  const precision = 2;
+  const map = [
+    { suffix: "T", threshold: 1e12 },
+    { suffix: "B", threshold: 1e9 },
+    { suffix: "M", threshold: 1e6 },
+    { suffix: "K", threshold: 1e3 },
+    { suffix: "", threshold: 1 },
+  ];
+
+  const found = map.find((x) => Math.abs(num) >= x.threshold);
+  if (found) {
+    const formatted = (num / found.threshold).toFixed(precision) + found.suffix;
+    return formatted.replace(".00", "");
+  }
+
+  return num;
 }

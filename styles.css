@@ -77,8 +77,8 @@ legend {
 .container {
   z-index: 999;
   position: absolute;
-  height: 150px;
-  width: 116px;
+  height: 170px;
+  width: 136px;
 }
 
 /* Extra small devices (phones, 600px and down) */
@@ -110,7 +110,7 @@ legend {
 .marker-main {
   margin: 0.3rem;
   background: white;
-  padding: 0.4rem;
+  padding: 0.5rem;
   border-radius: 50%;
   margin-bottom: -2px;
   box-shadow: 1px 0px 20px 2px rgba(0, 0, 0, 0.705);
@@ -122,15 +122,15 @@ legend {
 .marker-point {
   width: 0;
   height: 0;
-  border-left: 9px solid transparent;
-  border-right: 9px solid transparent;
-  border-top: 10px solid white;
+  border-left: 14px solid transparent;
+  border-right: 14px solid transparent;
+  border-top: 20px solid white;
 }
 
 .marker-dot {
   height: 6%;
   width: 7%;
-  margin: 0.1rem;
+  margin: 0.2rem;
   border-radius: 50%;
   background: white;
   box-shadow: 1px 0px 20px 2px rgb(0, 0, 0);
@@ -138,8 +138,8 @@ legend {
 
 .gauge {
   --p: 69; /* gauge radius percentage */
-  --b: 9px; /* dot thickness */
-  --w: 80px; /* gauge width*/
+  --b: 12px; /* dot thickness */
+  --w: 110px; /* gauge width*/
   --min: #095470;
   --mid: #1d9b51;
   --max: #ffab00;
@@ -149,7 +149,7 @@ legend {
   position: relative;
   display: inline-grid;
   place-content: center;
-  font-size: 2rem;
+  font-size: 2.5rem;
   font-weight: bold;
 }
 .gauge:before,
@@ -199,8 +199,8 @@ legend {
 .gauge-min {
   position: absolute;
   font-weight: bold;
-  bottom: 58px;
-  right: 67px;
+  bottom: 50px;
+  right: 82px;
   font-size: medium;
   color: #095470;
 }
@@ -208,8 +208,8 @@ legend {
 .gauge-max {
   position: absolute;
   font-weight: bold;
-  bottom: 58px;
-  right: 33px;
+  bottom: 50px;
+  right: 35px;
   font-size: medium;
   color: #ffab00;
 }
