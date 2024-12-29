@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <title>WindBorne Web Design Intern Challenge</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="marker">
+        <div class="marker-main">
+          <div class="gauge">53</div>
+          <div class="gauge-min">42</div>
+          <div class="gauge-max">65</div>
+        </div>
+        <div class="marker-point"></div>
+        <div class="marker-dot"></div>
+      </div>
+    </div>
+    <fieldset class="marker-options">
+      <h1 class="marker-options_header">Marker Options</h1>
+
+      <!-- Marker Size Options (Small, Large) -->
+      <fieldset id="Sizes" class="text-left option-bg">
+        <legend class="option-header">Size</legend>
+        <div class="marker-sizes">
+          <input
+            type="radio"
+            name="marker-Size"
+            id="size-S"
+            value="small"
+            checked />
+          <label for="size-S">Small</label>
+        </div>
+        <div class="marker-sizes">
+          <input type="radio" name="marker-Size" id="size-L" value="large" />
+          <label for="size-L">Large</label>
+        </div>
+      </fieldset>
+
+      <!-- Marker Value Options (Min, Max, Current) -->
+      <fieldset id="Values" class="text-left option-bg">
+        <legend class="option-header">Values</legend>
+        <div class="marker-values">
+          <label for="minValue">Min Value:</label>
+          <input type="number" id="minValue" name="minValue" min="0" max="99" />
+        </div>
+        <div class="marker-values">
+          <label for="maxValue">Max Value:</label>
+          <input type="number" id="maxValue" name="maxValue" min="0" max="99" />
+        </div>
+        <div class="marker-values">
+          <label for="curValue">Current Value:</label>
+          <input type="number" id="curValue" name="curValue" min="0" max="99" />
+        </div>
+      </fieldset>
+
+      <!-- Marker Color Options (Min, Mid, Max) -->
+      <fieldset id="Colors" class="text-left option-bg">
+        <legend class="option-header">Colors</legend>
+        <div class="marker-colors">
+          <label for="minVColor">Min Value Color:</label>
+          <input type="color" id="minVColor" name="minVColor" value="#095470" />
+        </div>
+        <div class="marker-colors">
+          <label for="midVColor">Midpoint Value Color:</label>
+          <input type="color" id="midVColor" name="midVColor" value="#1d9b51" />
+        </div>
+        <div class="marker-colors">
+          <label for="maxVColor">Max Value Color:</label>
+          <input type="color" id="maxVColor" name="maxVColor" value="#ffab00" />
+        </div>
+      </fieldset>
+    </fieldset>
+    <script src="scripts.js"></script>
+  </body>
+</html>

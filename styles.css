@@ -1,0 +1,276 @@
+/* Start of CSS Reset */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font: inherit; /* Get rid of all font sizes and heights */
+}
+
+html {
+  hanging-punctuation: first last; /* Not supported in Chrome */
+  font-family: sans-serif;
+}
+
+body {
+  min-height: 100vh;
+}
+
+/* Media responsive */
+img,
+picture,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-wrap: balance;
+}
+
+p {
+  max-width: 75ch;
+  text-wrap: pretty; /* Prevents orphans on lines */
+}
+
+fieldset {
+  margin-inline-start: 0;
+  margin-inline-end: 0;
+  padding-block-start: 0;
+  padding-block-end: 0;
+  padding-inline-start: 0;
+  padding-inline-end: 0;
+  border: none;
+  min-inline-size: min-content;
+}
+
+legend {
+  float: left;
+  width: 100%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  :has(:target) {
+    scroll-behavior: smooth;
+    scroll-padding-top: 3rem;
+  }
+}
+
+/* End of CSS Reset */
+
+.text-left {
+  width: 100%;
+  text-align: left;
+}
+
+.container {
+  z-index: 999;
+  position: absolute;
+  height: 150px;
+  width: 116px;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  /* Styles for small devices */
+  .container {
+    bottom: 15%;
+    left: 25%;
+  }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+  .container {
+    top: 50%;
+    left: 44%;
+  }
+}
+
+.marker {
+  z-index: 9999;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.marker-main {
+  margin: 0.3rem;
+  background: white;
+  padding: 0.4rem;
+  border-radius: 50%;
+  margin-bottom: -2px;
+  box-shadow: 1px 0px 20px 2px rgba(0, 0, 0, 0.705);
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  grid-template-rows: repeat(1, minmax(0, 1fr));
+}
+
+.marker-point {
+  width: 0;
+  height: 0;
+  border-left: 9px solid transparent; /* border-left: 14px solid transparent; */
+  border-right: 9px solid transparent; /* border-right: 14px solid transparent; */
+  border-top: 10px solid white; /* border-top: 20px solid transparent; */
+}
+
+.marker-dot {
+  height: 6%;
+  width: 7%;
+  margin: 0.1rem;
+  border-radius: 50%;
+  background: white;
+  box-shadow: 1px 0px 20px 2px rgb(0, 0, 0);
+}
+
+.gauge {
+  --p: 69; /* gauge radius percentage */
+  --b: 9px; /* dot thickness */
+  --w: 80px; /* gauge width*/
+  --min: #095470;
+  --mid: #1d9b51;
+  --max: #ffab00;
+
+  width: var(--w);
+  aspect-ratio: 1/1;
+  position: relative;
+  display: inline-grid;
+  place-content: center;
+  font-size: 2rem;
+  font-weight: bold;
+}
+.gauge:before,
+.gauge:after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+}
+.gauge:before {
+  inset: 0;
+
+  background: conic-gradient(
+      from -125deg,
+      var(--min) 1%,
+      var(--mid) calc(var(--p) * 0.5%),
+      var(--max) calc(var(--p) * 1%),
+      #00000000 0
+    ),
+    radial-gradient(farthest-side, var(--min) 100%, #0000) 9.5% 79% / var(--b)
+      var(--b) no-repeat,
+    radial-gradient(farthest-side, var(--max) 100%, #0000) 91% 79% / var(--b)
+      var(--b) no-repeat;
+  -webkit-mask: radial-gradient(
+    farthest-side,
+    #0000 calc(99% - var(--b)),
+    #000 calc(100% - var(--b))
+  );
+  mask: radial-gradient(
+    farthest-side,
+    #0000 calc(99% - var(--b)),
+    #000 calc(100% - var(--b))
+  );
+}
+
+/* Gauge mark */
+.gauge:after {
+  inset: calc(50% - var(--b) / 2);
+  background: white;
+
+  /* Start  Center End */
+  /*69.9deg 30deg -10deg*/
+
+  /* Point */
+  transform: rotate(calc(var(--p) * 15deg)) translate(calc(var(--w) / 2 - 50%));
+}
+
+.gauge-min {
+  position: absolute;
+  font-weight: bold;
+  bottom: 58px;
+  right: 67px;
+  font-size: medium;
+  color: #095470;
+}
+
+.gauge-max {
+  position: absolute;
+  font-weight: bold;
+  bottom: 58px;
+  right: 33px;
+  font-size: medium;
+  color: #ffab00;
+}
+
+/* Start of marker options */
+.marker-options {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  z-index: 9999;
+  top: 10px;
+  right: 10px;
+  background: #e2e8f0;
+  justify-content: center; /* Horizontally center items */
+  align-items: center; /* Vertically center items */
+  padding: 0.5rem;
+  border-radius: 10px;
+  gap: 0.3rem;
+}
+
+.marker-options_header {
+  font-weight: bold;
+  color: #0ea5e9;
+}
+
+.marker-sizes {
+  padding-left: 3rem;
+}
+
+.marker-colors {
+  padding-left: 1rem;
+  display: grid;
+  grid-template-columns: 70% 20%;
+}
+
+.marker-values {
+  padding-left: 1rem;
+  display: grid;
+  grid-template-columns: 70% 20%;
+}
+
+.marker-values input[type="radio"] {
+  accent-color: #0e87eb;
+}
+
+.option-bg {
+  background: #c8dbf2;
+  border: none;
+  border-radius: 10px;
+  padding-bottom: 0.5rem;
+}
+
+.option-header {
+  color: #0ea5e9;
+  border-bottom: 1px solid #0ea5e9;
+  border-width: 2px;
+  width: 90%;
+  display: block;
+  padding-top: 0.3rem;
+  margin-left: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+/* End of marker options */
