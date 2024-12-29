@@ -32,6 +32,7 @@ function valuesEventListener() {
                 gaugeMin.style.setProperty("--number", event.target.value);
                 gaugeMin.style.fontSize = getFontSize(event.target.value, size);
                 gaugeMin.textContent = abrNum;
+                calcGauge(getComputedStyle(gauge).getPropertyValue("--number"));
               } else {
                 event.target.value = "";
               }
@@ -41,6 +42,7 @@ function valuesEventListener() {
                 gaugeMax.style.setProperty("--number", event.target.value);
                 gaugeMax.style.fontSize = getFontSize(event.target.value, size);
                 gaugeMax.textContent = abrNum;
+                calcGauge(getComputedStyle(gauge).getPropertyValue("--number"));
               } else {
                 event.target.value = "";
               }
@@ -49,6 +51,7 @@ function valuesEventListener() {
               //curValue
               if (isValidCurValue(event.target.value)) {
                 gauge.style.setProperty("--number", event.target.value);
+                calcGauge(event.target.value);
                 gauge.textContent = abrNum;
               } else {
                 event.target.value = "";
@@ -186,6 +189,27 @@ function abbreviateNumber(num) {
   }
 
   return num;
+}
+
+function calcGauge(num) {
+  const gauge = document.querySelector(".gauge");
+  gauge.style.setProperty(
+    "--value",
+    `${0.0369 * calcPercentage(num) + 69.9}deg`
+  );
+}
+
+function calcPercentage(num) {
+  const gaugeMin = document.querySelector(".gauge-min");
+  const gaugeMax = document.querySelector(".gauge-max");
+  const minValue = Number(
+    getComputedStyle(gaugeMin).getPropertyValue("--number")
+  );
+  const maxValue = Number(
+    getComputedStyle(gaugeMax).getPropertyValue("--number")
+  );
+
+  return ((Number(num) - minValue) / (maxValue - minValue)) * 100;
 }
 
 function isValidValue(num) {

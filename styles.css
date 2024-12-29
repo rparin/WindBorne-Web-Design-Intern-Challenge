@@ -152,6 +152,8 @@ legend {
   --mid: #1d9b51;
   --max: #ffab00;
   --number: 53;
+  /* --value: calc(0.038 * (var(--number)) + 69.9); */
+  --value: 71.7deg;
 
   width: var(--w);
   aspect-ratio: 1/1;
@@ -199,10 +201,11 @@ legend {
   background: white;
 
   /* Start  Center End */
-  /*69.9deg 30deg -10deg*/
+  /*69.9deg 71.8deg 73.6deg*/
 
   /* Point */
-  transform: rotate(calc(var(--p) * 15deg)) translate(calc(var(--w) / 2 - 50%));
+  transform: rotate(calc(var(--p) * var(--value)))
+    translate(calc(var(--w) / 2 - 50%));
 }
 
 .gauge-min {
