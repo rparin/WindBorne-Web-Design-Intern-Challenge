@@ -60,6 +60,10 @@ legend {
   width: 100%;
 }
 
+a {
+  color: #72b8ff;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   :has(:target) {
     scroll-behavior: smooth;
@@ -68,18 +72,6 @@ legend {
 }
 
 /* End of CSS Reset */
-
-.text-left {
-  width: 100%;
-  text-align: left;
-}
-
-.container {
-  z-index: 999;
-  position: absolute;
-  height: 170px;
-  width: 136px;
-}
 
 #ValueError {
   color: red;
@@ -103,8 +95,22 @@ legend {
   color: white;
 }
 
-a {
-  color: #72b8ff;
+.text-left {
+  width: 100%;
+  text-align: left;
+}
+
+.container {
+  z-index: 999;
+  position: absolute;
+  height: 170px;
+  width: 136px;
+}
+
+.map-bg {
+  height: 100dvh;
+  width: auto;
+  object-fit: cover;
 }
 
 /* Extra small devices (phones, 600px and down) */
