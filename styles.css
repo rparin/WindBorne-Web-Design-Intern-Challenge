@@ -89,6 +89,24 @@ legend {
   display: none;
 }
 
+#footer {
+  position: absolute;
+  z-index: 9999;
+  bottom: 0px;
+  width: 100%;
+  background: #000;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  color: white;
+}
+
+a {
+  color: #72b8ff;
+}
+
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
   /* Styles for small devices */
