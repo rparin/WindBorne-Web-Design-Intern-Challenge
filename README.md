@@ -53,6 +53,6 @@ My approach focused on breaking down the complex UI into smaller, manageable com
 [css-io]: https://img.shields.io/badge/CSS-ffffff.svg?style=for-the-badge&logo=CSS3&logoColor=264de4
 [js-url]: https://developer.mozilla.org/en-US/docs/Learn_web_development/Getting_started/Your_first_website/Adding_interactivity#what_is_javascript
 [js-io]: https://img.shields.io/badge/JavaScript-%2320232a.svg?style=for-the-badge&logo=javascript&logoColor=F7DF1E
-[Website-url]: https://hello-dog.vercel.app/
+[Website-url]: https://rparin.github.io/WindBorne-Web-Design-Intern-Challenge/
 
 <!-- Badges: https://simpleicons.org or https://github.com/simple-icons/simple-icons/blob/master/slugs.md -->
