@@ -69,6 +69,7 @@ function sizesEventListener() {
       const container = document.querySelector(".container");
       const markerMain = document.querySelector(".marker-main");
       const markerDot = document.querySelector(".marker-dot");
+      const markerPoint = document.querySelector(".marker-point");
       const gauge = document.querySelector(".gauge");
       const gaugeMin = document.querySelector(".gauge-min");
       const gaugeMax = document.querySelector(".gauge-max");
@@ -87,6 +88,9 @@ function sizesEventListener() {
             container.style.width = "136px";
             markerMain.style.padding = "0.5rem";
             markerDot.style.margin = "0.2rem";
+            markerPoint.style.borderLeft = "14px solid transparent";
+            markerPoint.style.borderRight = markerPoint.style.borderLeft;
+            markerPoint.style.borderTop = "20px solid white";
             gauge.style.setProperty("--b", "12px");
             gauge.style.setProperty("--w", "110px");
             gauge.style.fontSize = "2.5rem";
@@ -103,6 +107,9 @@ function sizesEventListener() {
             container.style.width = "116px";
             markerMain.style.padding = "0.4rem";
             markerDot.style.margin = "0.1rem";
+            markerPoint.style.borderLeft = "9px solid transparent";
+            markerPoint.style.borderRight = markerPoint.style.borderLeft;
+            markerPoint.style.borderTop = "10px solid white";
             gauge.style.setProperty("--b", "9px");
             gauge.style.setProperty("--w", "80px");
             gauge.style.fontSize = "2rem";

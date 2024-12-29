@@ -122,9 +122,9 @@ legend {
 .marker-point {
   width: 0;
   height: 0;
-  border-left: 9px solid transparent; /* border-left: 14px solid transparent; */
-  border-right: 9px solid transparent; /* border-right: 14px solid transparent; */
-  border-top: 10px solid white; /* border-top: 20px solid transparent; */
+  border-left: 9px solid transparent;
+  border-right: 9px solid transparent;
+  border-top: 10px solid white;
 }
 
 .marker-dot {
