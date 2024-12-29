@@ -1,14 +1,7 @@
 // Wait for the document to be ready
 document.addEventListener("DOMContentLoaded", () => {
   setupEventListeners();
-  initializePage();
 });
-
-function initializePage() {
-  const sizeValue = document.querySelector(
-    'input[name="marker-Size"]:checked'
-  ).value;
-}
 
 // Function to set up event listeners
 function setupEventListeners() {
